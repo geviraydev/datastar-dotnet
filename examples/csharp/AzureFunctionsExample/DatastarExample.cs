@@ -33,7 +33,7 @@ public class DatastarExample(IDatastarService datastarService)
 
     [Function("StreamElementPatches")]
     public async Task StreamElementPatches(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "stream-element-patches")] HttpRequestData req)
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "stream-element-patches")] HttpRequestData req)
     {
         const string message = "Hello, Elements!";
         Signals? mySignals = await _datastarService.ReadSignalsAsync<Signals>();
@@ -51,7 +51,7 @@ public class DatastarExample(IDatastarService datastarService)
 
     [Function("StreamSignalPatches")]
     public async Task StreamSignalPatches(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "stream-signal-patches")] HttpRequestData req)
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "stream-signal-patches")] HttpRequestData req)
     {
         const string message = "Hello, Signals!";
         Signals? mySignals = await _datastarService.ReadSignalsAsync<Signals>();
@@ -69,7 +69,7 @@ public class DatastarExample(IDatastarService datastarService)
 
     [Function("ExecuteScript")]
     public async Task ExecuteScript(
-        [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = "execute-script")] HttpRequestData req)
+        [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "execute-script")] HttpRequestData req)
     {
         await _datastarService.ExecuteScriptAsync("alert('Hello! from the server 🚀')");
     }
