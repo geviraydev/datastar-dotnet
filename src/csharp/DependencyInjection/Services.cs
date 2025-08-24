@@ -97,7 +97,7 @@ public interface IDatastarService
     Task<TType?> ReadSignalsAsync<TType>(JsonSerializerOptions options, CancellationToken cancellationToken);
 }
 
-public class DatastarService(Core.ServerSentEventGenerator serverSentEventGenerator) : IDatastarService
+internal class DatastarService(Core.ServerSentEventGenerator serverSentEventGenerator) : IDatastarService
 {
     public Task StartServerEventStreamAsync()
         => serverSentEventGenerator.StartServerEventStreamAsync();

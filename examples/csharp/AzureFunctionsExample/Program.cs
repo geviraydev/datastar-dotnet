@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Azure.Functions.Worker.Middleware;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Azure.Functions.Worker;
+using StarFederation.Datastar.DependencyInjection;
 
 var builder = FunctionsApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.ConfigureFunctionsWebApplication();
 
 // Add HttpContextAccessor
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddDatastar();
 
 // Add your custom middleware to populate HttpContextAccessor
 builder.UseMiddleware<HttpContextMiddleware>();

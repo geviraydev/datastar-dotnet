@@ -5,19 +5,18 @@ using Microsoft.Extensions.Logging;
 using StarFederation.Datastar.DependencyInjection;
 using Microsoft.AspNetCore.Http;
 using System.Text.Json.Serialization;
-using StarFederation.Datastar.FSharp;
 
 namespace AzureFunctionsExample;
 
 public class DatastarExample
 {
     private readonly ILogger<DatastarExample> _logger;
-    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IDatastarService _datastarService;
 
-    public DatastarExample(ILogger<DatastarExample> logger, IHttpContextAccessor httpContextAccessor)
+    public DatastarExample(ILogger<DatastarExample> logger, IDatastarService datastarService)
     {
         _logger = logger;
-        _httpContextAccessor = httpContextAccessor;
+        _datastarService = datastarService;
     }
 
     public record Signals
@@ -38,21 +37,18 @@ public class DatastarExample
         response.Headers.Add("Cache-Control", "no-cache");
         response.Headers.Add("Connection", "keep-alive");
 
-        // Manually create IDatastarService using the injected IHttpContextAccessor
-        IDatastarService datastarService = new DatastarService(new ServerSentEventGenerator(_httpContextAccessor));
-
         const string message = "Hello, Elements!";
-        Signals? mySignals = await datastarService.ReadSignalsAsync<Signals>();
+        Signals? mySignals = await _datastarService.ReadSignalsAsync<Signals>();
 
-        await datastarService.PatchSignalsAsync(new { show_patch_element_message = true });
+        await _datastarService.PatchSignalsAsync(new { show_patch_element_message = true });
 
         for (var index = 1; index < message.Length; ++index)
         {
-            await datastarService.PatchElementsAsync($"""<div id="message">{message[..index]}</div>""");
+            await _datastarService.PatchElementsAsync($"""<div id="message">{message[..index]}</div>""");
             await Task.Delay(TimeSpan.FromMilliseconds(mySignals?.Delay.GetValueOrDefault(0) ?? 0));
         }
 
-        await datastarService.PatchElementsAsync($"""<div id="message">{message}</div>""");
+        await _datastarService.PatchElementsAsync($"""<div id="message">{message}</div>""");
         return response;
     }
 
@@ -67,21 +63,18 @@ public class DatastarExample
         response.Headers.Add("Cache-Control", "no-cache");
         response.Headers.Add("Connection", "keep-alive");
 
-        // Manually create IDatastarService using the injected IHttpContextAccessor
-        IDatastarService datastarService = new DatastarService(new ServerSentEventGenerator(_httpContextAccessor));
-
         const string message = "Hello, Signals!";
-        Signals? mySignals = await datastarService.ReadSignalsAsync<Signals>();
+        Signals? mySignals = await _datastarService.ReadSignalsAsync<Signals>();
 
-        await datastarService.PatchSignalsAsync(new { show_patch_element_message = false });
+        await _datastarService.PatchSignalsAsync(new { show_patch_element_message = false });
 
         for (var index = 1; index < message.Length; ++index)
         {
-            await datastarService.PatchSignalsAsync(new { signals_message = message[..index] });
+            await _datastarService.PatchSignalsAsync(new { signals_message = message[..index] });
             await Task.Delay(TimeSpan.FromMilliseconds(mySignals?.Delay.GetValueOrDefault(0) ?? 0));
         }
 
-        await datastarService.PatchSignalsAsync(new { signals_message = message });
+        await _datastarService.PatchSignalsAsync(new { signals_message = message });
         return response;
     }
 
@@ -96,10 +89,7 @@ public class DatastarExample
         response.Headers.Add("Cache-Control", "no-cache");
         response.Headers.Add("Connection", "keep-alive");
 
-        // Manually create IDatastarService using the injected IHttpContextAccessor
-        IDatastarService datastarService = new DatastarService(new ServerSentEventGenerator(_httpContextAccessor));
-
-        await datastarService.ExecuteScriptAsync("alert('Hello! from the server 🚀')");
+        await _datastarService.ExecuteScriptAsync("alert('Hello! from the server 🚀')");
         return response;
     }
 
