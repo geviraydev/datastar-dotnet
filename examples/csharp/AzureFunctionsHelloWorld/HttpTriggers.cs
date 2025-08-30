@@ -4,9 +4,9 @@ using Microsoft.Azure.Functions.Worker.Http;
 using StarFederation.Datastar.DependencyInjection;
 using System.Text.Json.Serialization;
 
-namespace AzureFunctionsExample;
+namespace AzureFunctionsHelloWorld;
 
-public class DatastarExample(IDatastarService datastarService)
+public class HttpTriggers(IDatastarService datastarService)
 {
     private readonly IDatastarService _datastarService = datastarService;
 
