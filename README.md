@@ -8,11 +8,11 @@ Real-time Hypermedia first Library and Framework for dotnet
 
 ```html
 <main class="container" id="main" data-signals="{'input':'','output':'what'}">
-    <button data-on-click="@get('/displayDate')">Display Date</button>
+    <button data-on:click="@get('/displayDate')">Display Date</button>
     <div id="target"></div>
-    <input type="text" placeholder="input:" data-bind-input/><br/>
+    <input type="text" placeholder="input:" data-bind:input/><br/>
     <span data-text-output></span>
-    <button data-on-click="@post('/changeOutput')">Change Output</button>
+    <button data-on:click="@post('/changeOutput')">Change Output</button>
 </main>
 ```
 
@@ -33,7 +33,7 @@ builder.Services.AddDatastar();
 app.MapGet("/displayDate", async (IDatastarService datastarService) =>
 {
     string today = DateTime.Now.ToString("%y-%M-%d %h:%m:%s");
-    await datastarService.PatchElementsAsync($"""<div id='target'><span id='date'><b>{today}</b><button data-on-click="@get('/removeDate')">Remove</button></span></div>""");
+    await datastarService.PatchElementsAsync($"""<div id='target'><span id='date'><b>{today}</b><button data-on:click="@get('/removeDate')">Remove</button></span></div>""");
 });
 
 // removeDate - removing an element
