@@ -6,7 +6,7 @@
         <RootNamespace>StarFederation.Datastar</RootNamespace>
         <Nullable>enable</Nullable>
         <Title>StarFederation.Datastar</Title>
-        <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+        <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
         <ImplicitUsings>enable</ImplicitUsings>
 
         <!-- General info -->
@@ -20,7 +20,7 @@
 
         <!-- NuGet config -->
         <PackageId>StarFederation.Datastar</PackageId>
-        <PackageVersion>1.1.1</PackageVersion>
+        <PackageVersion>1.1.2</PackageVersion>
         <PackageTags>datastar;datastar-sharp;fsharp;functional;asp.net core;asp.net;.net core;routing;web;csharp</PackageTags>
         <PackageProjectUrl>https://github.com/starfederation/datastar-dotnet</PackageProjectUrl>
         <PackageIcon>datastar_icon.png</PackageIcon>

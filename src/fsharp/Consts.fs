@@ -25,7 +25,7 @@ module Consts =
     let DatastarKey = "datastar"
 
     // Defaults
-    let DefaultSseRetryDuration = TimeSpan.FromMilliseconds 1000
+    let DefaultSseRetryDuration = TimeSpan.FromSeconds(1.0)
     let DefaultElementPatchMode = Outer
 
     [<Literal>]
