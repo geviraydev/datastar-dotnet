@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "StarFederation.Datastar.FSharp", "src\fsharp\StarFederation.Datastar.FSharp.fsproj", "{D357821B-B5A9-4076-9DC3-20FC744C746F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StarFederation.Datastar", "src\csharp\StarFederation.Datastar.csproj", "{9C733B58-AA42-4A9A-8A03-887D0B69418A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "environment", "environment", "{07A426A5-31E4-437E-ABB7-F69449A36DE6}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D357821B-B5A9-4076-9DC3-20FC744C746F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D357821B-B5A9-4076-9DC3-20FC744C746F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D357821B-B5A9-4076-9DC3-20FC744C746F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D357821B-B5A9-4076-9DC3-20FC744C746F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C733B58-AA42-4A9A-8A03-887D0B69418A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C733B58-AA42-4A9A-8A03-887D0B69418A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C733B58-AA42-4A9A-8A03-887D0B69418A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C733B58-AA42-4A9A-8A03-887D0B69418A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
