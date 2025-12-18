@@ -53,6 +53,9 @@ type ServerSentEventGenerator(httpContextAccessor:IHttpContextAccessor) =
         if options.UseViewTransition <> Consts.DefaultElementsUseViewTransitions then
             writer |> ServerSentEvent.sendDataBytesLine Bytes.DatalineUseViewTransition (if options.UseViewTransition then Bytes.bTrue else Bytes.bFalse)
 
+        if options.Namespace <> Consts.DefaultPatchElementNamespace then
+            writer |> ServerSentEvent.sendDataBytesLine Bytes.DatalineNamespace (options.Namespace |> Bytes.PatchElementNamespace.toBytes)
+
         for segment in String.splitLinesToSegments elements do
             writer |> ServerSentEvent.sendDataSegmentLine Bytes.DatalineElements segment
 

@@ -9,6 +9,7 @@ public class PatchElementsOptions
     public string? Selector { get; init; } = null;
     public ElementPatchMode PatchMode { get; init; } = Consts.DefaultElementPatchMode;
     public bool UseViewTransition { get; init; } = Consts.DefaultElementsUseViewTransitions;
+    public PatchElementNamespace Namespace { get; init; } = PatchElementNamespace.Html;
     public string? EventId { get; init; } = null;
     public TimeSpan Retry { get; init; } = Consts.DefaultSseRetryDuration;
 
@@ -21,6 +22,7 @@ public class PatchElementsOptions
             options.Selector ?? FSharpValueOption<string>.ValueNone,
             From(options.PatchMode),
             options.UseViewTransition,
+            FromNs(options.Namespace),
             options.EventId ?? FSharpValueOption<string>.ValueNone,
             options.Retry
         );
@@ -36,6 +38,14 @@ public class PatchElementsOptions
             ElementPatchMode.Remove => Core.ElementPatchMode.Remove,
             ElementPatchMode.Replace => Core.ElementPatchMode.Replace,
             _ => throw new ArgumentOutOfRangeException(nameof(patchElementsMode), patchElementsMode, null)
+        };
+
+        static Core.PatchElementNamespace FromNs(PatchElementNamespace patchElementNamespace) => patchElementNamespace switch
+        {
+            PatchElementNamespace.Html => Core.PatchElementNamespace.Html,
+            PatchElementNamespace.Svg => Core.PatchElementNamespace.Svg,
+            PatchElementNamespace.MathMl => Core.PatchElementNamespace.MathMl,
+            _ => throw new ArgumentOutOfRangeException(nameof(patchElementNamespace), patchElementNamespace, null)
         };
     }
 }

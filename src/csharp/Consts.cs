@@ -20,6 +20,13 @@ public enum ElementPatchMode
     After
 }
 
+public enum PatchElementNamespace
+{
+    Html,
+    Svg,
+    MathMl,
+}
+
 public enum EventType
 {
     /// An event for patching HTML elements into the DOM.
@@ -35,6 +42,7 @@ public static class Consts
     /// Default: outer - Morphs the element into the existing element.
     public const ElementPatchMode DefaultElementPatchMode = ElementPatchMode.Outer;
 
+    public const PatchElementNamespace DefaultPatchElementNamespace = PatchElementNamespace.Html;
     public const bool DefaultElementsUseViewTransitions = false;
     public const bool DefaultPatchSignalsOnlyIfMissing = false;
 
@@ -59,6 +67,14 @@ public static class Consts
         ElementPatchMode.Before => "before",
         ElementPatchMode.After => "after",
         _ => throw new NotImplementedException($"ElementPatchMode.{enumValue}")
+    };
+
+    public static string EnumToString(PatchElementNamespace enumValue) => enumValue switch
+    {
+        PatchElementNamespace.Html => "html",
+        PatchElementNamespace.Svg => "svg",
+        PatchElementNamespace.MathMl => "mathml",
+        _ => throw new NotImplementedException($"PatchElementNamespace.{enumValue}")
     };
 
     public static string EnumToString(EventType enumValue) => enumValue switch
