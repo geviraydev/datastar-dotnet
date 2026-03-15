@@ -21,12 +21,14 @@ type PatchElementsOptions =
     { Selector: Selector voption
       PatchMode: ElementPatchMode
       UseViewTransition: bool
+      Namespace: PatchElementNamespace
       EventId: string voption
       Retry: TimeSpan }
     static member Defaults =
         { Selector = ValueNone
           PatchMode = Consts.DefaultElementPatchMode
           UseViewTransition = Consts.DefaultElementsUseViewTransitions
+          Namespace = Consts.DefaultPatchElementNamespace
           EventId = ValueNone
           Retry = Consts.DefaultSseRetryDuration }
 

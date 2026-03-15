@@ -20,6 +20,11 @@ type ElementPatchMode =
     /// Inserts the element after the existing element.
     | After
 
+type PatchElementNamespace =
+    | Html
+    | Svg
+    | MathMl
+
 module Consts =
     [<Literal>]
     let DatastarKey = "datastar"
@@ -27,6 +32,7 @@ module Consts =
     // Defaults
     let DefaultSseRetryDuration = TimeSpan.FromSeconds(1.0)
     let DefaultElementPatchMode = Outer
+    let DefaultPatchElementNamespace = Html
 
     [<Literal>]
     let DefaultElementsUseViewTransitions = false
@@ -46,6 +52,7 @@ module internal Bytes =
     let DatalineMode = "mode"B
     let DatalineElements = "elements"B
     let DatalineUseViewTransition = "useViewTransition"B
+    let DatalineNamespace = "namespace"B
     let DatalineSignals = "signals"B
     let DatalineOnlyIfMissing = "onlyIfMissing"B
 
@@ -58,6 +65,17 @@ module internal Bytes =
     let bOpenScript = "<script>"B
     let bCloseScript = "</script>"B
     let bBody = "body"B
+
+    module PatchElementNamespace =
+        let bHtml = "html"B
+        let bSvg = "svg"B
+        let bMathMl = "mathml"B
+
+        let inline toBytes this =
+            match this with
+            | Html -> bHtml
+            | Svg -> bSvg
+            | MathMl -> bMathMl
 
     module ElementPatchMode =
         let bOuter = "outer"B
